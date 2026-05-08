@@ -1,0 +1,47 @@
+### SCORE
+GET http://localhost:8080/api/score/jigsaw sudoku
+Accept: application/json
+
+###
+POST http://localhost:8080/api/score
+Content-Type: application/json
+Accept: application/json
+
+{
+  "player": "POST_PLAYER",
+  "game": "jigsaw sudoku",
+  "points": 1234,
+  "playedOn": "2026-04-12T21:00:00"
+}
+
+### COMMENT
+GET http://localhost:8080/api/comment/jigsaw sudoku
+Accept: application/json
+
+###
+POST http://localhost:8080/api/comment
+Content-Type: application/json
+Accept: application/json
+
+{
+  "userName": "POST_PLAYER",
+  "game": "jigsaw sudoku",
+  "text": "POST Test Comment",
+  "createdAt": "2026-04-12T21:05:00"
+}
+
+### RATING
+GET http://localhost:8080/api/rating/jigsaw sudoku
+Accept: application/json
+
+###
+POST http://localhost:8080/api/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "POST_PLAYER",
+  "game": "jigsaw sudoku",
+  "value": 5,
+  "createdAt": "2026-04-12T21:10:00"
+}
