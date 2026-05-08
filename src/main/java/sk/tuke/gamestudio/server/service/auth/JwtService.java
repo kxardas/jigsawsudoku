@@ -3,6 +3,7 @@ package sk.tuke.gamestudio.server.service.auth;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import sk.tuke.gamestudio.entity.User;
 
@@ -12,14 +13,12 @@ import java.util.Date;
 
 @Service
 public class JwtService {
-  private static final String SECRET = "ULTRA_SUPER_MEGA_VERY_DOTA_2_SECRET_KEY_THIS_IS_VERY_LONG_YOU_CANT_GUESS_IT";
-
   private static final long EXPIRATION_MS = 1000L * 60 * 60 * 24; // 24h
 
   private final SecretKey key;
 
-  public JwtService() {
-    this.key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+  public JwtService(@Value("${jwt.secret}") String secret) {
+    this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
   }
 
   public String generateToken(User user) {
