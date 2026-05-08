@@ -42,10 +42,10 @@ export function CommentForm({ submitting = false, disabled = false, onSubmit }: 
         disabled={disabled || submitting}
         onChange={(event) => setText(event.target.value)}
         rows={4}
-        className={error ? "border-red-500/40" : "border-white/10"}
+        className={error ? "border-[var(--error-color)]" : "border-[var(--border-color)]"}
       />
 
-      {error && <p className='text-sm text-red-300'>{error}</p>}
+      {error && <p className='text-sm text-[var(--error-color)]'>{error}</p>}
 
       <div className='flex justify-end'>
         <Button type='submit' disabled={disabled || submitting}>

@@ -19,7 +19,7 @@ export function RatingSkeleton() {
         </div>
       </div>
 
-      <div className='rounded-2xl border border-white/10 bg-[var(--bg-color)] p-5'>
+      <div className='rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] p-5'>
         <div className='mb-3 space-y-2'>
           <Skeleton className='h-4 w-24' />
           <Skeleton className='h-4 w-52' />

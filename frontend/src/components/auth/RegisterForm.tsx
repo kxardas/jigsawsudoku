@@ -169,9 +169,9 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }: RegisterFormProps) 
       </Button>
 
       <div className='flex items-center gap-3'>
-        <div className='h-px flex-1 bg-white/10' />
+        <div className='h-px flex-1 bg-[var(--border-color)]' />
         <p className='text-xs font-medium text-[var(--sub-color)]'>or</p>
-        <div className='h-px flex-1 bg-white/10' />
+        <div className='h-px flex-1 bg-[var(--border-color)]' />
       </div>
 
       <div className='grid grid-cols-2 gap-2'>

@@ -28,7 +28,7 @@ export function CommentsList({ comments }: CommentsListProps) {
       {comments.map((comment) => (
         <article
           key={comment.ident ?? `${comment.userName}-${comment.createdAt}`}
-          className='group min-w-0 rounded-2xl border border-white/10 bg-[var(--bg-color)] p-3 transition hover:border-white/20'
+          className='group min-w-0 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] p-3 transition hover:border-[var(--accent-color)]'
         >
           <div className='flex min-w-0 gap-3'>
             <div className='flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-color)] text-sm font-black text-[var(--bg-color)]'>

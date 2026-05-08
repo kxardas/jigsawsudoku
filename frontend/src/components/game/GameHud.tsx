@@ -38,7 +38,7 @@ function HudItem({
 }) {
   return (
     <div className='flex min-w-0 items-center gap-2'>
-      <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white/[0.03] text-[var(--sub-color)]'>
+      <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[var(--sub-alt-color)] text-[var(--sub-color)]'>
         {icon}
       </div>
 
@@ -55,7 +55,7 @@ function HudItem({
 
 export function GameHud({ game, displayElapsedSeconds }: GameHudProps) {
   return (
-    <div className='rounded-2xl border border-white/10 bg-[var(--bg-color)] px-4 py-3'>
+    <div className='rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] px-4 py-3'>
       <div className='grid gap-3 sm:grid-cols-2 lg:grid-cols-5'>
         <HudItem
           label='Board'

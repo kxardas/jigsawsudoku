@@ -8,7 +8,7 @@ type CardProps = {
 export function Card({ children, className = "" }: CardProps) {
   return (
     <section
-      className={`rounded-2xl border border-white/10 bg-[var(--bg-color)] p-5 shadow-lg ${className}`}
+      className={`rounded-2xl border border-[var(--border-color)] bg-[var(--sub-alt-color)] p-5 shadow-lg shadow-black/10 ${className}`}
     >
       {children}
     </section>

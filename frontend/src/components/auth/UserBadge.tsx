@@ -4,6 +4,7 @@ import { DEFAULT_PLAYER_NAME } from "../../utils/constants";
 import { useState } from "react";
 import { useToast } from "../../context/ToastContext";
 import { Button } from "../ui/Button";
+import { useTranslation } from "react-i18next";
 
 type UserBadgeProps = {
   onOpenAuthModal: () => void;
@@ -24,7 +25,8 @@ export function UserBadge({ onOpenAuthModal }: UserBadgeProps) {
   
   const { showToast } = useToast();
   const { user, isAuthenticated, logout } = useAuth();
-  const username = user?.username ?? DEFAULT_PLAYER_NAME;
+  const { t } = useTranslation();
+  const username = user?.username ?? t("user.guest", { defaultValue: DEFAULT_PLAYER_NAME });
 
   async function handleLogout() {
     try {
@@ -34,12 +36,12 @@ export function UserBadge({ onOpenAuthModal }: UserBadgeProps) {
 
       showToast({
         type: "success",
-        message: "Logged out successfully",
+        message: t("toast.logoutSuccess"),
       });
     } catch {
       showToast({
         type: "error",
-        message: "Could not log out",
+        message: t("toast.logoutError"),
       });
     } finally {
       setLoggingOut(false);
@@ -47,7 +49,7 @@ export function UserBadge({ onOpenAuthModal }: UserBadgeProps) {
   }
 
   return (
-    <div className="flex w-fit items-center gap-3 rounded-2xl border border-white/10 bg-[var(--bg-color)] px-3 py-2 shadow-lg shadow-black/10">
+    <div className="flex w-fit items-center gap-3 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] px-3 py-2 shadow-lg shadow-black/10">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--accent-color)] text-sm font-black text-[var(--bg-color)] shadow-[0_0_18px_rgba(124,110,230,0.25)]">
         {isAuthenticated ? getInitials(username) : <UserRound className="h-5 w-5" />}
       </div>
@@ -65,12 +67,12 @@ export function UserBadge({ onOpenAuthModal }: UserBadgeProps) {
           />
 
           <p className="text-xs text-[var(--sub-color)]">
-            {isAuthenticated ? "Logged in" : "Guest mode"}
+            {isAuthenticated ? t("user.loggedIn") : t("user.guestMode")}
           </p>
         </div>
       </div>
 
-      <div className="ml-1 h-8 w-px bg-white/10" />
+      <div className="ml-1 h-8 w-px bg-[var(--border-color)]" />
 
       {isAuthenticated ? (
         <button
@@ -80,7 +82,7 @@ export function UserBadge({ onOpenAuthModal }: UserBadgeProps) {
           className="cursor-pointer inline-flex h-9 items-center gap-2 rounded-xl px-3 text-sm font-bold text-[var(--sub-color)] transition hover:bg-[var(--bg-color)] hover:text-[var(--text-color)]"
         >
           <LogOut className="h-4 w-4" />
-          {loggingOut ? "Loggint out..." : "Logout"}
+          {loggingOut ? t("user.loggingOut") : t("user.logout")}
         </button>
       ) : (
         <Button
@@ -88,7 +90,7 @@ export function UserBadge({ onOpenAuthModal }: UserBadgeProps) {
           onClick={onOpenAuthModal}
           className="h-9 rounded-xl px-3 text-sm font-bold text-[var(--bg-color)] transition hover:brightness-110"
         >
-          Sign in
+          {t("user.signIn")}
         </Button>
       )}
     </div>

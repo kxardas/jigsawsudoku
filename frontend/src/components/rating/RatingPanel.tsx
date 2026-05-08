@@ -69,7 +69,7 @@ export function RatingPanel() {
             </div>
           </div>
           {isAuthenticated ? (
-            <div className='rounded-2xl border border-white/10 bg-[var(--bg-color)] p-5'>
+            <div className='rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] p-5'>
               <div className='mb-3'>
                 <p className='text-sm font-bold text-[var(--text-color)]'>Your rating</p>
 

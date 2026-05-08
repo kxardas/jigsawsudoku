@@ -52,7 +52,7 @@ export function RatingStars({
               ${
                 disabled
                   ? ""
-                  : "cursor-pointer hover:scale-110 hover:bg-white/5"
+                  : "cursor-pointer hover:scale-110 hover:bg-[var(--border-color)]"
               }
             `}
             aria-label={`Rate ${starValue} stars`}

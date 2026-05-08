@@ -22,7 +22,7 @@ export function SudokuBoard({ game, selectedCell, notes, onSelectCell }: SudokuB
 
   return (
     <div className='relative w-fit scale-90 origin-bottom sm:scale-100'>
-      <div className='relative rounded-[1.75rem] border border-white/10 p-3 shadow-[inset_0_0_28px_rgba(255,255,255,0.025),0_22px_70px_rgba(0,0,0,0.34)]'>
+      <div className='relative rounded-[1.75rem] border border-[var(--border-color)] p-3 shadow-[inset_0_0_28px_rgba(255,255,255,0.025),0_22px_60px_rgba(0,0,0,0.24)]'>
         <svg
           className='block overflow-visible stroke-gray-700/75'
           height={boardSize}

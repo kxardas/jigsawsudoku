@@ -12,14 +12,11 @@ type GameControlsProps = {
 
 export function GameControls({
   loading,
+  hintsLeft,
   onOpenNewGameModal,
   onHint,
-  onSolve,
   onClearBoard,
 }: GameControlsProps) {
-  if (false) {
-    onSolve();
-  }
   return (
     <div className='flex flex-wrap gap-2'>
       <Button type='button' disabled={loading} onClick={onOpenNewGameModal} className='h-11'>
@@ -33,7 +30,7 @@ export function GameControls({
       <Button
         type='button'
         variant='success'
-        disabled={loading}
+        disabled={loading || hintsLeft <= 0}
         onClick={onHint}
         className='h-11'
       >

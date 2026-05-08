@@ -55,8 +55,8 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
             transition={{ duration: 0.22, ease: "easeOut" }}
             onMouseDown={(event) => event.stopPropagation()}
           >
-            <div className='relative grid overflow-hidden rounded-2xl border border-white/10 bg-[var(--bg-color)] shadow-2xl md:grid-cols-[0.9fr_1.1fr]'>
-              <section className='relative hidden min-h-[560px] overflow-hidden border-r border-white/10 bg-[var(--bg-color)]/55 p-6 md:block'>
+            <div className='relative grid overflow-hidden rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] shadow-2xl md:grid-cols-[0.9fr_1.1fr]'>
+              <section className='relative hidden min-h-[560px] overflow-hidden border-r border-[var(--border-color)] bg-[var(--bg-color)]/55 p-6 md:block'>
                 <div className='relative flex h-full flex-col justify-between'>
                   <div>
                     <div className='flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--accent-color)] text-[var(--bg-color)] shadow-[0_0_34px_rgba(124,110,230,0.35)]'>
@@ -76,7 +76,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   </div>
 
                   <div className='space-y-3'>
-                    <div className='rounded-2xl border border-white/10 bg-green-600/9 p-4 shadow-[0_0_34px_rgba(83,188,78,0.2)]'>
+                    <div className='rounded-2xl border border-[var(--border-color)] bg-green-600/9 p-4 shadow-[0_0_34px_rgba(83,188,78,0.2)]'>
                       <div className='flex items-start gap-3'>
                         <ShieldCheck className='mt-0.5 h-5 w-5 shrink-0 text-green-300' />
 

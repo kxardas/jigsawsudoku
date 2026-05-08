@@ -31,7 +31,7 @@ const variantClasses: Record<ButtonVariant, string> = {
     "bg-lime-400 hover:bg-lime-300 active:bg-lime-500 text-slate-950 shadow-lg shadow-lime-400/25",
 
   ghost:
-    "border border-fuchsia-400/30 bg-fuchsia-500/10 text-fuchsia-200 hover:bg-fuchsia-500/20 hover:text-white active:bg-fuchsia-500/30",
+    "border border-fuchsia-400/30 bg-fuchsia-500/10 text-[var(--text-color)] hover:bg-fuchsia-500/20 hover:text-gray-600 active:bg-fuchsia-500/30",
 
   ghost_on:
     "border border-fuchsia-300/50 bg-fuchsia-500/35 text-fuchsia-100 shadow-lg shadow-fuchsia-500/15 hover:bg-fuchsia-500/35 hover:text-white active:bg-fuchsia-500/45",
