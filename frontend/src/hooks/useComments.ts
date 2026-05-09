@@ -2,7 +2,6 @@ import { useState } from "react";
 import { getComments, addComment } from "../api/commentApi";
 import type { Comment } from "../types/comment";
 import { useToast } from "../context/ToastContext";
-import { getApiErrorMessage } from "../utils/apiError";
 
 export function useComments() {
   const [comments, setComments] = useState<Comment[]>([]);
@@ -44,14 +43,12 @@ export function useComments() {
       });
 
       await loadComments(comment.game);
-    } catch (error) {
-      const message = getApiErrorMessage(error, "Could not add comment.");
-
-      setError(message);
+    } catch {
+      setError("Could not submit comment");
 
       showToast({
         type: "error",
-        message,
+        message: "Could not submit comment",
       });
     } finally {
       setSubmitting(false);

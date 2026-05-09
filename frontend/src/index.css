@@ -1,35 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  color-scheme: dark;
+  --bg-color: #070912;
+  --sub-alt-color: #0b0f1b;
 
-  --bg-color: #0b1120;
-  --sub-alt-color: #0d1424;
+  --text-color: #eef2ff;
+  --sub-color: #8f9bb7;
 
-  --text-color: #f4f7ff;
-  --sub-color: #99a7c2;
-
-  --accent-color: #1d4ed8;
-  --border-color: rgb(255 255 255 / 0.11);
+  --accent-color: #3b82f6;
 
   --error-color: #fb7185;
   --success-color: #34d399;
-}
-
-:root[data-theme="light"] {
-  color-scheme: light;
-
-  --bg-color: #f7f8fc;
-  --sub-alt-color: #ffffff;
-
-  --text-color: #111827;
-  --sub-color: #64748b;
-
-  --accent-color: #1d4ed8;
-  --border-color: rgb(15 23 42 / 0.12);
-
-  --error-color: #e11d48;
-  --success-color: #059669;
 }
 
 /* #7aa2f7 */
@@ -42,14 +23,9 @@ html {
 body {
   margin: 0px;
   min-height: 100vh;
-  background: var(--bg-color);
-  color: var(--text-color);
 
   padding-top: 15px;
   padding-bottom: 15px;
-  transition:
-    background-color 180ms ease,
-    color 180ms ease;
 }
 
 .custom-scrollbar {

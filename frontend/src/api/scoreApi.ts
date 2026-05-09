@@ -6,3 +6,7 @@ export async function getTopScores(game: string): Promise<Score[]> {
 
   return res.data;
 }
+
+export async function addScore(req: Score): Promise<void> {
+  await axiosInstance.post("/score", req);
+}

@@ -21,12 +21,12 @@ export function NumberPad({
   const numbers = Array.from({ length: size }, (_, index) => index + 1);
 
   return (
-    <div className='flex w-full flex-wrap justify-center gap-2 sm:w-11 sm:flex-col sm:flex-nowrap sm:gap-1.5'>
+    <div className='bg-[var(--sub-alt-color)] border border-white/10 rounded-2xl w-full flex flex-wrap justify-between p-2 sm:flex-col sm:flex-nowrap sm:h-full'>
       {numbers.map((number) => (
         <Button
           key={number}
           type='button'
-          variant='secondary'
+          variant='number_pad'
           disabled={disabled}
           onClick={() => onNumberClick(number)}
           className='flex h-9 w-9 items-center justify-center px-0 text-base font-medium sm:h-9.5 sm:w-9.5 sm:text-lg'
@@ -35,6 +35,8 @@ export function NumberPad({
           {number}
         </Button>
       ))}
+
+      <div className="bg-white/10 w-[1px] h-full sm:w-full sm:h-[1px] sm:my-2" />
 
       <Button
         type='button'

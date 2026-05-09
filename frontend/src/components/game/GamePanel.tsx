@@ -1,7 +1,9 @@
 import type { GameState, SelectedCell } from "../../types/game";
 import { Card } from "../ui/Card";
+import { GameBoardSkeleton } from "../ui/GameBoardSkeleton";
+import { Reveal } from "../ui/Reveal";
 import { GameControls } from "./GameControls";
-import { GameHud } from "./GameHud";
+import { GameStatus } from "./GameStatus";
 import { NumberPad } from "./NumberPad";
 import { SudokuBoard } from "./SudokuBoard";
 
@@ -10,6 +12,10 @@ type GamePanelProps = {
   selectedCell: SelectedCell | null;
   loading: boolean;
   displayElapsedSeconds: number;
+  notes: number[][][];
+  notesMode: boolean;
+
+  onNotesModeChange: (value: boolean) => void;
   onOpenNewGameModal: () => void;
   onSolve: () => void;
   onClearBoard: () => void;
@@ -17,9 +23,6 @@ type GamePanelProps = {
   onSelectCell: (row: number, col: number) => void;
   onNumberClick: (value: number) => void;
   onClear: () => void;
-  notes: number[][][];
-  notesMode: boolean;
-  onNotesModeChange: (value: boolean) => void;
 };
 
 export function GamePanel({
@@ -29,6 +32,7 @@ export function GamePanel({
   displayElapsedSeconds,
   notes,
   notesMode,
+  onNotesModeChange,
   onOpenNewGameModal,
   onSolve,
   onClearBoard,
@@ -36,14 +40,16 @@ export function GamePanel({
   onSelectCell,
   onNumberClick,
   onClear,
-  onNotesModeChange,
 }: GamePanelProps) {
+  const boardSize = game?.size;
+
   return (
     <Card className='space-y-6'>
-      <div className='flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between'>
+      <div className='flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between'>
         <div>
-          <h2 className='text-2xl font-black text-[var(--text-color)]'>Game</h2>
-          <p className='mt-1 text-sm text-[var(--sub-color)]'>Select a cell and place a number.</p>
+          <h2 className='text-2xl font-bold text-[var(--text-color)]'>Game</h2>
+
+          <p className='text-sm text-[var(--sub-color)]'>Select a cell and place a number.</p>
         </div>
 
         <GameControls
@@ -56,10 +62,12 @@ export function GamePanel({
         />
       </div>
 
-      <GameHud game={game} displayElapsedSeconds={displayElapsedSeconds} />
+      <GameStatus game={game} displayElapsedSeconds={displayElapsedSeconds} />
 
       <div className='flex justify-center pb-2'>
-        <div className='flex items-center gap-4 flex-col sm:flex-row'>
+        <Reveal className='flex items-center gap-2 flex-col sm:flex-row'>
+          {loading && !game && <GameBoardSkeleton size={boardSize} />}
+
           <SudokuBoard
             game={game}
             selectedCell={selectedCell}
@@ -75,7 +83,7 @@ export function GamePanel({
             notesMode={notesMode}
             onNotesModeChange={onNotesModeChange}
           />
-        </div>
+        </Reveal>
       </div>
     </Card>
   );

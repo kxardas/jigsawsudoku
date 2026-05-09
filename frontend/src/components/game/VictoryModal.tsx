@@ -62,7 +62,7 @@ export function VictoryModal({
             transition={{ duration: 0.22, ease: "easeOut" }}
             onMouseDown={(event) => event.stopPropagation()}
           >
-            <div className='relative overflow-hidden rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] p-5 shadow-2xl'>
+            <div className='relative overflow-hidden rounded-2xl border border-white/10 bg-[var(--sub-alt-color)] p-5 shadow-2xl'>
               <button
                 type='button'
                 onClick={onClose}
@@ -92,7 +92,7 @@ export function VictoryModal({
                 </p>
               </div>
 
-              <div className='mt-5 rounded-2xl border border-[var(--border-color)] bg-[var(--sub-alt-color)] px-4 py-3 text-center'>
+              <div className='mt-5 rounded-2xl border border-white/10 bg-[var(--sub-alt-color)] px-4 py-3 text-center'>
                 <p className='text-xs font-bold uppercase tracking-[0.18em] text-[var(--sub-color)]'>
                   Score
                 </p>
@@ -106,7 +106,7 @@ export function VictoryModal({
               </div>
 
               <div className='mt-3 grid grid-cols-3 gap-2'>
-                <div className='rounded-xl border border-[var(--border-color)] bg-[var(--sub-alt-color)] px-3 py-2 text-center'>
+                <div className='rounded-xl border border-white/10 bg-[var(--sub-alt-color)] px-3 py-2 text-center'>
                   <p className='text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--sub-color)]'>
                     Time
                   </p>
@@ -115,7 +115,7 @@ export function VictoryModal({
                   </p>
                 </div>
 
-                <div className='rounded-xl border border-[var(--border-color)] bg-[var(--sub-alt-color)] px-3 py-2 text-center'>
+                <div className='rounded-xl border border-white/10 bg-[var(--sub-alt-color)] px-3 py-2 text-center'>
                   <p className='text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--sub-color)]'>
                     Hints
                   </p>
@@ -124,7 +124,7 @@ export function VictoryModal({
                   </p>
                 </div>
 
-                <div className='rounded-xl border border-[var(--border-color)] bg-[var(--sub-alt-color)] px-3 py-2 text-center'>
+                <div className='rounded-xl border border-white/10 bg-[var(--sub-alt-color)] px-3 py-2 text-center'>
                   <p className='text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--sub-color)]'>
                     Mode
                   </p>

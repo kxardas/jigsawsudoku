@@ -1,4 +1,4 @@
-import { Lightbulb, RotateCcw } from "lucide-react";
+import { Lightbulb, RotateCcw, Sparkles } from "lucide-react";
 import { Button } from "../ui/Button";
 
 type GameControlsProps = {
@@ -12,9 +12,9 @@ type GameControlsProps = {
 
 export function GameControls({
   loading,
-  hintsLeft,
   onOpenNewGameModal,
   onHint,
+  onSolve,
   onClearBoard,
 }: GameControlsProps) {
   return (
@@ -23,14 +23,10 @@ export function GameControls({
         New Game
       </Button>
 
-      {/* <Button type='button' variant='success' disabled={loading} onClick={onSolve} className='h-11'>
-        Solve
-      </Button> */}
-
       <Button
         type='button'
         variant='success'
-        disabled={loading || hintsLeft <= 0}
+        disabled={loading}
         onClick={onHint}
         className='h-11'
       >
@@ -41,6 +37,9 @@ export function GameControls({
         <RotateCcw className='h-4 w-4' />
       </Button>
 
+      <Button type='button' variant='success' disabled={loading} onClick={onSolve} className='h-11'>
+        <Sparkles className="h-4 w-4" />
+      </Button>
     </div>
   );
 }

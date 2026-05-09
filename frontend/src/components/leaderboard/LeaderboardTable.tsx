@@ -17,7 +17,7 @@ export function LeaderboardTable({ scores }: LeaderboardTableProps) {
   }
 
   return (
-    <div className='overflow-hidden rounded-xl border border-[var(--border-color)]'>
+    <div className='overflow-hidden rounded-xl border border-white/10'>
       <table className='w-full text-left text-sm'>
         <thead className='bg-[var(--bg-color)] text-[var(--sub-color)]'>
           <tr>
@@ -32,7 +32,7 @@ export function LeaderboardTable({ scores }: LeaderboardTableProps) {
           {scores.map((score, index) => (
             <tr
               key={score.ident ?? `${score.player}-${score.playedOn}-${index}`}
-              className='border-t border-[var(--border-color)] text-[var(--text-color)]'
+              className='border-t border-white/10 text-[var(--text-color)]'
             >
               <td className='px-4 py-3 text-[var(--sub-color)]'>{index + 1}</td>
               <td className='px-4 py-3 font-semibold'>{score.player}</td>

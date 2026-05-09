@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import sk.tuke.gamestudio.entity.Score;
 import sk.tuke.gamestudio.entity.User;
 import sk.tuke.gamestudio.server.dto.GameStateDto;
@@ -13,8 +12,10 @@ import sk.tuke.gamestudio.server.dto.NewGameRequestDto;
 import sk.tuke.gamestudio.server.service.GameSession;
 import sk.tuke.gamestudio.server.service.JigsawSudokuGameService;
 import sk.tuke.gamestudio.server.service.ScoreCalculator;
-import sk.tuke.gamestudio.server.service.auth.AuthenticatedUserService;
+import sk.tuke.gamestudio.server.service.auth.AuthCookieService;
+import sk.tuke.gamestudio.server.service.auth.JwtService;
 import sk.tuke.gamestudio.service.score.ScoreService;
+import sk.tuke.gamestudio.service.user.UserService;
 
 import java.util.Date;
 
@@ -23,18 +24,24 @@ import java.util.Date;
 public class JigsawSudokuRest {
 
   private final JigsawSudokuGameService gameService;
-  private final AuthenticatedUserService authenticatedUserService;
+  private final AuthCookieService authCookieService;
+  private final JwtService jwtService;
+  private final UserService userService;
   private final ScoreCalculator scoreCalculator;
   private final ScoreService scoreService;
 
   public JigsawSudokuRest(
           JigsawSudokuGameService gameService,
-          AuthenticatedUserService authenticatedUserService,
+          AuthCookieService authCookieService,
+          JwtService jwtService,
+          UserService userService,
           ScoreCalculator scoreCalculator,
           ScoreService scoreService
   ) {
     this.gameService = gameService;
-    this.authenticatedUserService = authenticatedUserService;
+    this.authCookieService = authCookieService;
+    this.jwtService = jwtService;
+    this.userService = userService;
     this.scoreCalculator = scoreCalculator;
     this.scoreService = scoreService;
   }
@@ -88,29 +95,31 @@ public class JigsawSudokuRest {
           @PathVariable String gameId,
           HttpServletRequest request
   ) throws Exception {
-    User user = authenticatedUserService.getAuthenticatedUser(request);
+    String token = authCookieService.extractToken(request);
+
+    if (token == null || !jwtService.isTokenValid(token)) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    String username = jwtService.extractUsername(token);
+    User user = userService.findByUsername(username);
+
+    if (user == null) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
 
     GameSession session = gameService.getSession(gameId);
 
     if (!session.getBoard().getState().name().equals("SOLVED")) {
-      throw new ResponseStatusException(
-              HttpStatus.BAD_REQUEST,
-              "Game is not solved yet"
-      );
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     if (session.getBoard().getIsSolvedAutomatically()) {
-      throw new ResponseStatusException(
-              HttpStatus.BAD_REQUEST,
-              "Automatically solved games cannot be submitted"
-      );
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     if (session.isScoreSubmitted()) {
-      throw new ResponseStatusException(
-              HttpStatus.CONFLICT,
-              "Score has already been submitted"
-      );
+      return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     int points = scoreCalculator.calculateScore(

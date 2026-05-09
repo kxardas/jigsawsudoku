@@ -30,7 +30,7 @@ export function SudokuCell({
       onClick={onClick}
       disabled={isFixed}
       className={`
-        group relative flex h-13 w-13
+        group relative flex h-15.5 w-15.5
         items-center justify-center
         overflow-hidden
         border-0

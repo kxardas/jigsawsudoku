@@ -7,7 +7,7 @@ type EmptyStateProps = {
 export function EmptyState({ title, description, className = "" }: EmptyStateProps) {
   return (
     <div
-      className={`rounded-2xl border border-dashed border-[var(--border-color)] bg-[var(--bg-color)] p-6 text-center ${className}`}
+      className={`rounded-2xl border border-dashed border-white/10 bg-[var(--bg-color)] p-6 text-center ${className}`}
     >
       <p className='font-semibold text-[var(--text-color)]'>{title}</p>
 

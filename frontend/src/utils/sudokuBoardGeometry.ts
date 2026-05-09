@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import type { GameState } from "../types/game";
 
-export const CELL_SIZE = 52;
+export const CELL_SIZE = 62;
 export const REGION_GAP = 3;
 export const REGION_STROKE_WIDTH = 1;
 export const REGION_CORNER_RADIUS = 10;

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { getAverageRating, getRating, setRating } from "../api/ratingApi";
 import type { Rating } from "../types/rating";
 import { useToast } from "../context/ToastContext";
-import { getApiErrorMessage } from "../utils/apiError";
 
 export function useRating() {
   const [averageRating, setAverageRating] = useState<number>(0);
@@ -71,14 +70,12 @@ export function useRating() {
 
       await loadAverageRating(rating.game);
       await loadPlayerRating(rating.game, rating.username);
-    } catch (error) {
-      const message = getApiErrorMessage(error, "Could not set new rating.");
-
-      setError(message);
+    } catch {
+      setError("Could not set new rating");
 
       showToast({
         type: "error",
-        message,
+        message: "Could not set new rating",
       });
     } finally {
       setSubmitting(false);

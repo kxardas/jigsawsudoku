@@ -8,7 +8,7 @@ export type GameStateValue = "PLAYING" | "SOLVED" | "FAILED";
 
 export type GameState = {
   gameId: string;
-  size: BoardSize;
+  size: number;
   board: number[][];
   fixedCells: boolean[][];
   regions: number[][];

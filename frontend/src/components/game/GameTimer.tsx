@@ -7,7 +7,7 @@ type GameTimerProps = {
 
 export function GameTimer({ seconds }: GameTimerProps) {
   return (
-    <div className='flex items-center gap-2 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] px-4 py-2'>
+    <div className='flex items-center gap-2 rounded-2xl border border-white/10 bg-[var(--bg-color)] px-4 py-2'>
       <Clock3 className='h-4 w-4 text-[var(--sub-color)]' />
 
       <div>

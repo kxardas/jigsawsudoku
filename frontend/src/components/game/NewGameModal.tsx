@@ -23,7 +23,7 @@ function getOptionClass(isActive: boolean) {
     ${
       isActive
         ? "border-solid border-fuchsia-400/30 bg-fuchsia-500/10 text-fuchsia-200 hover:bg-fuchsia-500/20 text-[var(--text-color)]"
-        : "bg-[var(--bg-color)] text-[var(--sub-color)] hover:bg-[#222637] hover:text-[var(--text-color)] border-dashed border-[var(--border-color)]"
+        : "bg-[var(--bg-color)] text-[var(--sub-color)] hover:bg-[#222637] hover:text-[var(--text-color)] border-dashed border-white/10"
     }
   `;
 }
@@ -90,7 +90,7 @@ export function NewGameModal({
           }}
         >
           <motion.div
-            className='w-full max-w-md rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] p-6 shadow-2xl'
+            className='w-full max-w-md rounded-2xl border border-white/10 bg-[var(--sub-alt-color)] p-6 shadow-2xl'
             initial={{ opacity: 0, scale: 0.95, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 1.1, y: -24 }}

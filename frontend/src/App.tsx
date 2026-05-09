@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { GameBoardSkeleton } from "./components/ui/GameBoardSkeleton";
 import { ToastContainer } from "./components/ui/ToastContainer";
 import { NewGameModal } from "./components/game/NewGameModal";
 import { GamePanel } from "./components/game/GamePanel";
@@ -16,8 +15,6 @@ import { VictoryModal } from "./components/game/VictoryModal";
 import { useAuth } from "./context/AuthContext";
 import { useToast } from "./context/ToastContext";
 import { submitGameScore } from "./api/gameApi";
-import { ACTIVE_GAME_ID_STORAGE_KEY } from "./utils/constants";
-import { getApiErrorMessage } from "./utils/apiError";
 
 export default function App() {
   const [hasShownVictoryModal, setHasShownVictoryModal] = useState(false);
@@ -50,7 +47,6 @@ export default function App() {
     resetBoard,
     solveCurrentGame,
     useHint,
-    loadSavedGame,
   } = useGame();
 
   const { user, isAuthenticated } = useAuth();
@@ -64,15 +60,7 @@ export default function App() {
 
     hasStartedInitialGame.current = true;
 
-    async function startInitialGame() {
-      const loadedSavedGame = await loadSavedGame();
-
-      if (!loadedSavedGame) {
-        await startNewGame(boardSize, difficulty);
-      }
-    }
-
-    startInitialGame();
+    startNewGame(boardSize, difficulty);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -109,22 +97,14 @@ export default function App() {
       setScoreSubmitted(true);
       setLeaderboardReloadKey((current) => current + 1);
 
-      localStorage.removeItem(ACTIVE_GAME_ID_STORAGE_KEY);
-
       showToast({
         type: "success",
         message: "Score submitted",
       });
-    } catch (error) {
-      const message = getApiErrorMessage(error, "Could not submit score.");
-
-      if (message.toLowerCase().includes("already")) {
-        setScoreSubmitted(true);
-      }
-
+    } catch {
       showToast({
         type: "error",
-        message,
+        message: "Could not submit score",
       });
     } finally {
       setScoreSubmitting(false);
@@ -170,12 +150,10 @@ export default function App() {
         <AppGrid
           sidebar={
             <>
-              <LeaderboardPanel reloadKey={leaderboardReloadKey} /> <RatingPanel />
+              <RatingPanel /> <LeaderboardPanel reloadKey={leaderboardReloadKey} /> 
             </>
           }
         >
-          {loading && !game && <GameBoardSkeleton size={boardSize} />}
-
           {game && (
             <GamePanel
               game={game}

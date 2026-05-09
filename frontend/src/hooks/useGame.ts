@@ -6,12 +6,9 @@ import {
   solveGame,
   clearBoard,
   requestHint,
-  getGame,
 } from "../api/gameApi";
-import { ACTIVE_GAME_ID_STORAGE_KEY } from "../utils/constants";
 import { useEffect, useState } from "react";
 import { useToast } from "../context/ToastContext";
-import { getApiErrorMessage } from "../utils/apiError";
 
 function createEmptyNotes(size: number) {
   return Array.from({ length: size }, () => Array.from({ length: size }, () => [] as number[]));
@@ -80,7 +77,6 @@ export function useGame() {
       setNotes(createEmptyNotes(newGame.size));
       setNotesMode(false);
 
-      localStorage.setItem(ACTIVE_GAME_ID_STORAGE_KEY, newGame.gameId);
 
       setDisplayElapsedSeconds(newGame.elapsedSeconds);
       setBoardSize(selectedSize);
@@ -91,45 +87,12 @@ export function useGame() {
         message: "New game created",
       });
     } catch (error) {
-      const message = getApiErrorMessage(error, "Could not create game.");
-
-      setError(message);
+      setError("Could not create game.");
 
       showToast({
         type: "error",
-        message,
+        message: "Could not create game.",
       });
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function loadSavedGame() {
-    const savedGameId = localStorage.getItem(ACTIVE_GAME_ID_STORAGE_KEY);
-
-    if (!savedGameId) {
-      return false;
-    }
-
-    try {
-      setLoading(true);
-      setError("");
-
-      const savedGame = await getGame(savedGameId);
-
-      setGame(savedGame);
-      setNotes(createEmptyNotes(savedGame.size));
-      setNotesMode(false);
-
-      setBoardSize(savedGame.size);
-      setDifficulty(savedGame.difficulty);
-      setSelectedCell(null);
-      setDisplayElapsedSeconds(savedGame.elapsedSeconds);
-
-      return true;
-    } catch {
-      localStorage.removeItem(ACTIVE_GAME_ID_STORAGE_KEY);
-      return false;
     } finally {
       setLoading(false);
     }
@@ -256,13 +219,11 @@ export function useGame() {
         });
       }
     } catch (error) {
-      const message = getApiErrorMessage(error, "Could not make move.");
-
-      setError(message);
+      setError("Could not make move.");
 
       showToast({
         type: "error",
-        message,
+        message: "Could not make move.",
       });
     }
   }
@@ -287,13 +248,11 @@ export function useGame() {
       setNotes(createEmptyNotes(updatedGame.size));
       setNotesMode(false);
     } catch (error) {
-      const message = getApiErrorMessage(error, "Could not reset board.");
-
-      setError(message);
+      setError("Could not reset board.");
 
       showToast({
         type: "error",
-        message,
+        message: "Could not reset board.",
       });
     }
   }
@@ -353,13 +312,11 @@ export function useGame() {
         });
       }
     } catch (error) {
-      const message = getApiErrorMessage(error, "Could not use hint.");
-
-      setError(message);
+      setError("Could not use hint.");
 
       showToast({
         type: "error",
-        message,
+        message: "Could not use hint.",
       });
     } finally {
       setLoading(false);
@@ -406,13 +363,11 @@ export function useGame() {
         });
       }
     } catch (error) {
-      const message = getApiErrorMessage(error, "Could not clear cell.");
-
-      setError(message);
+      setError("Could not clear cell.");
 
       showToast({
         type: "error",
-        message,
+        message: "Could not clear cell.",
       });
     }
   }
@@ -442,13 +397,11 @@ export function useGame() {
         message: "Puzzle solved automatically",
       });
     } catch (error) {
-      const message = getApiErrorMessage(error, "Could not solve game.");
-
-      setError(message);
+      setError("Could not solve game.");
 
       showToast({
         type: "error",
-        message,
+        message: "Could not solve game.",
       });
     }
   }
@@ -468,7 +421,6 @@ export function useGame() {
     setDifficulty,
     setNotesMode,
     startNewGame,
-    loadSavedGame,
     selectCell,
     placeNumber,
     clearSelectedCell,

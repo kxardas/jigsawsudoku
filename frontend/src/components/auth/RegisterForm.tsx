@@ -6,7 +6,6 @@ import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
 import { registerSchema } from "../../validation/authSchemas";
 import z from "zod";
-import { getApiErrorMessage } from "../../utils/apiError";
 
 type RegisterFormProps = {
   onSuccess: () => void;
@@ -84,14 +83,12 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }: RegisterFormProps) 
       });
 
       onSuccess();
-    } catch (error) {
-      const message = getApiErrorMessage(error, "Invalid username or password.");
-
-      setFormError(message);
+    } catch {
+      setFormError("Invalid username or password.");
 
       showToast({
         type: "error",
-        message,
+        message: "Invalid username or password.",
       });
     } finally {
       setSubmitting(false);
@@ -165,13 +162,13 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }: RegisterFormProps) 
       )}
 
       <Button type='submit' disabled={submitting} className='w-full'>
-        {submitting ? "Creating account..." : "Create account"}
+        {submitting ? "Signing up..." : "Sign up"}
       </Button>
 
       <div className='flex items-center gap-3'>
-        <div className='h-px flex-1 bg-[var(--border-color)]' />
+        <div className='h-px flex-1 bg-white/10' />
         <p className='text-xs font-medium text-[var(--sub-color)]'>or</p>
-        <div className='h-px flex-1 bg-[var(--border-color)]' />
+        <div className='h-px flex-1 bg-white/10' />
       </div>
 
       <div className='grid grid-cols-2 gap-2'>
@@ -185,14 +182,14 @@ export function RegisterForm({ onSuccess, onSwitchToLogin }: RegisterFormProps) 
       </div>
 
       <p className='text-center text-sm text-[var(--sub-color)]'>
-        Already have an account?{" "}
+        New here?{" "}
         <button
           type='button'
           disabled={submitting}
           onClick={onSwitchToLogin}
           className='font-bold text-[var(--accent-color)] transition hover:brightness-125 disabled:cursor-not-allowed disabled:opacity-50'
         >
-          Log in
+          Create account
         </button>
       </p>
     </form>

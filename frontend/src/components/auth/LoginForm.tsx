@@ -6,7 +6,6 @@ import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
 import { loginSchema } from "../../validation/authSchemas";
 import z from "zod";
-import { getApiErrorMessage } from "../../utils/apiError";
 
 type LoginFormProps = {
   onSuccess: () => void;
@@ -74,14 +73,12 @@ export function LoginForm({ onSuccess, onSwitchToRegister }: LoginFormProps) {
       });
 
       onSuccess();
-    } catch (error) {
-      const message = getApiErrorMessage(error, "Invalid username or password.");
-      
-      setFormError(message);
+    } catch {
+      setFormError("Invalid username or password.");
 
       showToast({
         type: "error",
-        message,
+        message: "Invalid username or password.",
       });
     } finally {
       setSubmitting(false);
@@ -144,9 +141,9 @@ export function LoginForm({ onSuccess, onSwitchToRegister }: LoginFormProps) {
       </Button>
 
       <div className='flex items-center gap-3'>
-        <div className='h-px flex-1 bg-[var(--border-color)]' />
+        <div className='h-px flex-1 bg-white/10' />
         <p className='text-xs font-medium text-[var(--sub-color)]'>or</p>
-        <div className='h-px flex-1 bg-[var(--border-color)]' />
+        <div className='h-px flex-1 bg-white/10' />
       </div>
 
       <div className='grid grid-cols-2 gap-2'>

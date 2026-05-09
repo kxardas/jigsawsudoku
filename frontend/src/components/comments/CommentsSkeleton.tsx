@@ -6,7 +6,7 @@ export function CommentsSkeleton() {
       {Array.from({ length: 3 }).map((_, index) => (
         <article
           key={index}
-          className='rounded-2xl border border-[var(--border-color)] bg-[var(--bg-color)] p-4'
+          className='rounded-2xl border border-white/10 bg-[var(--bg-color)] p-4'
         >
           <div className='flex gap-3'>
             <Skeleton className='h-10 w-10 shrink-0 rounded-xl' />

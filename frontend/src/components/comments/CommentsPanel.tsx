@@ -21,11 +21,17 @@ export function CommentsPanel() {
   }, []);
 
   return (
-    <Card className='space-y-5'>
-      <div className='flex flex-col gap-1'>
-        <h2 className='text-2xl font-bold text-[var(--text-color)]'>Comments</h2>
+    <Card className='space-y-6 rounded-[2rem]'>
+      <div className='flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between'>
+        <div className='flex flex-col gap-1'>
+          <h2 className='text-2xl font-bold text-[var(--text-color)]'>Comments</h2>
 
-        <p className='text-sm text-[var(--sub-color)]'>Discuss the game with other players.</p>
+          <p className='text-sm text-[var(--sub-color)]'>Discuss the game with other players.</p>
+        </div>
+
+        <div className='w-fit rounded-full border border-white/10 bg-[var(--sub-alt-color)] px-3 py-1 text-xs font-bold text-[var(--sub-color)]'>
+          {comments.length} {comments.length === 1 ? "comment" : "comments"}
+        </div>
       </div>
 
       {error && <ErrorMessage message={error} />}
@@ -43,10 +49,10 @@ export function CommentsPanel() {
           }}
         />
       ) : (
-        <EmptyState 
-          title="Sign in to comment"
-          description="You can read comments as guest, but you need an account to write one."
-          className="px-4 py-4"
+        <EmptyState
+          title='Sign in to comment'
+          description='You can read comments as guest, but you need an account to write one.'
+          className='rounded-[1.75rem]'
         />
       )}
 

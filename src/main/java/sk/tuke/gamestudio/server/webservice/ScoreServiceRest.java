@@ -1,8 +1,6 @@
 package sk.tuke.gamestudio.server.webservice;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import sk.tuke.gamestudio.entity.Score;
 import sk.tuke.gamestudio.service.score.ScoreService;
 
@@ -25,9 +23,6 @@ public class ScoreServiceRest {
 
   @PostMapping
   public void addScore(@RequestBody Score score) {
-    throw new ResponseStatusException(
-            HttpStatus.GONE,
-            "Use /api/engine/games/{gameId}/score to submit score"
-    );
+    scoreService.addScore(score);
   }
 }
