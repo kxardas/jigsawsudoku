@@ -112,7 +112,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>sk.tuke.gamestudio.server.SpringClient</mainClass>
+                    <mainClass>sk.tuke.gamestudio.server.GameStudioServer</mainClass>
                 </configuration>
             </plugin>
         </plugins>

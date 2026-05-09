@@ -84,7 +84,7 @@ public class AuthRest {
 
     String username = req.getUsername() == null ? "unknown" : req.getUsername().trim().toLowerCase();
     boolean ipAllowed = rateLimitService.tryConsume(
-            "rate:login:ip" + ip,
+            "rate:login:ip:" + ip,
             20,
             Duration.ofMinutes(10)
     );

@@ -14,16 +14,22 @@ public class RedisRateLimitService {
   }
 
   public boolean tryConsume(String key, int limit, Duration window) {
-    Long count = redisTemplate.opsForValue().increment(key);
+    try {
+      Long count = redisTemplate.opsForValue().increment(key);
 
-    if (count == null) {
-      return false;
+      if (count == null) {
+        return true;
+      }
+
+      if (count == 1) {
+        redisTemplate.expire(key, window);
+      }
+
+      return count <= limit;
+    } catch (RuntimeException ex) {
+      // In local frontend/backend development Redis is optional.
+      // Do not block login/register just because rate limiting storage is unavailable.
+      return true;
     }
-
-    if (count == 1) {
-      redisTemplate.expire(key, window);
-    }
-
-    return count <= limit;
   }
 }
