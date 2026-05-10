@@ -58,6 +58,68 @@ export function useGame() {
     return () => window.clearInterval(intervalId);
   }, [game?.gameId, game?.state, game?.elapsedSeconds]);
 
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (!game) {
+        return;
+      }
+
+      if (game.state !== "PLAYING") {
+        return;
+      }
+
+      const activeElement = document.activeElement;
+
+      if (
+        activeElement instanceof HTMLInputElement ||
+        activeElement instanceof HTMLTextAreaElement ||
+        activeElement instanceof HTMLSelectElement
+      ) {
+        return;
+      }
+
+      if (!selectedCell) {
+        return;
+      }
+
+      const key = event.key;
+
+      if (/^[1-9]$/.test(key)) {
+        const value = Number(key);
+
+        if (value <= game.size) {
+          event.preventDefault();
+          void placeNumber(value);
+        }
+
+        return;
+      }
+
+      if (key === "Backspace" || key === "Delete" || key === "0") {
+        event.preventDefault();
+        void clearSelectedCell();
+        return;
+      }
+
+      if (key.toLowerCase() === "n") {
+        event.preventDefault();
+        setNotesMode((current) => !current);
+        return;
+      }
+
+      if (key === "Escape") {
+        event.preventDefault();
+        setSelectedCell(null);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [game, selectedCell, notesMode]);
+
   async function startNewGame(
     selectedSize: BoardSize = boardSize,
     selectedDifficulty: GameDifficulty = difficulty,
@@ -76,7 +138,6 @@ export function useGame() {
       setGame(newGame);
       setNotes(createEmptyNotes(newGame.size));
       setNotesMode(false);
-
 
       setDisplayElapsedSeconds(newGame.elapsedSeconds);
       setBoardSize(selectedSize);
