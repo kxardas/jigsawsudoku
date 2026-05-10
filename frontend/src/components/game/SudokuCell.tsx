@@ -34,7 +34,7 @@ export function SudokuCell({
         items-center justify-center
         overflow-hidden
         border-0
-        bg-transparent
+        bg-[var(--sub-alt-color)]
         text-xl font-normal
         outline-none
         transition-all duration-200

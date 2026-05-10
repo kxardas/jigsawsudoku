@@ -98,7 +98,7 @@ export function VictoryModal({
                 </p>
 
                 <CountUp
-                  className='mt-1 block text-4xl font-black text-[var(--accent-color)]'
+                  className='mt-1 block text-4xl font-black text-blue-500'
                   from={0}
                   to={game.currentScore}
                   duration={0.55}
@@ -140,7 +140,7 @@ export function VictoryModal({
                 </p>
               )}
 
-              <div className='mt-5 space-y-2'>
+              <div className='mt-3 space-y-2'>
                 {isAuthenticated ? (
                   <Button
                     type='button'
@@ -161,11 +161,7 @@ export function VictoryModal({
                     )}
                   </Button>
                 ) : (
-                  <Button
-                    type='button'
-                    onClick={onOpenAuthModal}
-                    className='w-full'
-                  >
+                  <Button type='button' onClick={onOpenAuthModal} className='w-full'>
                     <LockKeyhole className='h-4 w-4' />
                     Sign in to submit score
                   </Button>
